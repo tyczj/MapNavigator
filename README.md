@@ -55,3 +55,16 @@ As per Google's TOS using this library to supply turn-by-turn directions is stri
     Bret Taylor
     Product Manager, Google Maps
     
+You also only get 2,500 requests/day, more for business customers
+
+    The Directions API has the following limits in place:
+
+    2,500 directions requests per day.
+    When the mode of transportation is driving, walking, or cycling, each directions search counts as a single request.
+    Searching for transit directions counts as 4 requests.
+    Individual requests for driving, walking, or cycling directions may contain up to 8 intermediate waypoints in the request. Waypoints can not be specified for transit requests.
+    Google Maps API for Business customers have higher limits:
+
+    100,000 directions requests per day.
+    23 waypoints allowed in each request. Waypoints are not available for transit directions.
+    
