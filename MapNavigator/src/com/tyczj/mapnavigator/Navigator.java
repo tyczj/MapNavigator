@@ -29,13 +29,14 @@ public class Navigator {
 	private GoogleMap map;
 	private Directions directions;
 	private int pathColor = Color.BLUE;
-	private float pathWidth = 3;
-	private ArrayList<LatLng> path = new ArrayList<LatLng>();
-	private Polyline pathLine;
+	private int secondPath = Color.CYAN;
+	private int thirdPath = Color.RED;
+	private float pathWidth = 5;
 	private OnPathSetListener listener;
 	private boolean alternatives = false;
 	private long arrivalTime;
 	private String avoid;
+	private ArrayList<Polyline> lines = new ArrayList<Polyline>();
 	
 	public Navigator(GoogleMap map, LatLng startLocation, LatLng endLocation){
 		this.startPosition = startLocation;
@@ -134,11 +135,15 @@ public class Navigator {
 	
 	/**
 	 * Change the color of the path line, must be called before calling findDirections().
-	 * @param color
-	 * Color of the path line, default color is blue.
+	 * @param firstPath
+	 * Color of the first line, default color is blue.
+	 * @param secondPath
+	 * Color of the second line, default color is cyan
+	 * @param thirdPath
+	 * Color of the third line, default color is red
 	 */
-	public void setPathColor(int color){
-		pathColor = color;
+	public void setPathColor(int firstPath,int secondPath, int thirdPath){
+		pathColor = firstPath;
 	}
 	
 	/**
@@ -150,12 +155,12 @@ public class Navigator {
 		pathWidth = width;
 	}
 	
-	private Polyline showPath(Directions directions){	
-		return map.addPolyline(new PolylineOptions().addAll(directions.getPath()).color(pathColor).width(pathWidth));
+	private Polyline showPath(Route route,int color){
+		return map.addPolyline(new PolylineOptions().addAll(route.getPath()).color(color).width(pathWidth));
 	}
 	
-	public Polyline getPathLine(){
-		return pathLine;
+	public ArrayList<Polyline> getPathLines(){
+		return lines;
 	}
 
 	private class PathCreator extends AsyncTask<Void,Void,Directions>{
@@ -219,8 +224,17 @@ public class Navigator {
 			
 			if(directions != null){
 				Navigator.this.directions = directions;
-				pathLine = showPath(directions);
-				
+				for(int i=0; i<directions.getRoutes().size(); i++){
+					Route r = directions.getRoutes().get(i);
+					if(i == 0){
+						lines.add(showPath(r,pathColor));
+					}else if(i == 1){
+						lines.add(showPath(r,secondPath));
+					}else if(i == 3){
+						lines.add(showPath(r,thirdPath));
+					}
+				}
+
 				listener.onPathSetListener(directions);
 			}
 			
