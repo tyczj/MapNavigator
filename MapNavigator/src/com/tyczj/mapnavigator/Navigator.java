@@ -236,7 +236,10 @@ public class Navigator {
 					}
 				}
 
-				listener.onPathSetListener(directions);
+				if(listener != null){
+					listener.onPathSetListener(directions);
+				}
+				
 			}
 			
 			if(showCalc && pd != null){
