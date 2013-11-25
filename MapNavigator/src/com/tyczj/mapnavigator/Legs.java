@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class Legs {
 	
 	private ArrayList<Steps> steps;
@@ -24,8 +26,9 @@ public class Legs {
 			if(!leg.isNull("steps")){
 				JSONArray step = leg.getJSONArray("steps");
 				
-				for(int i=0; i<leg.length();i++){
+				for(int i=0; i<step.length();i++){
 					JSONObject obj = step.getJSONObject(i);
+					Log.d("Step", String.valueOf(i));
 					steps.add(new Steps(obj));
 				}
 			}
