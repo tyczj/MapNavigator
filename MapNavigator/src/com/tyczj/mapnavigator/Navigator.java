@@ -16,16 +16,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 
 public class Navigator {
+	@SuppressWarnings("unused")
 	private Context context;
 	private LatLng startPosition, endPosition;
 	private String mode;
-	private boolean showCalc;
 	private GoogleMap map;
 	private Directions directions;
 	private int pathColor = Color.BLUE;
@@ -77,7 +76,7 @@ public class Navigator {
 	 *  give alternative routes to the destination
 	 *  
 	 */
-	public void findDirections(boolean showDialog,boolean findAlternatives){
+	public void findDirections(boolean findAlternatives){
 		this.alternatives = findAlternatives;
 		new PathCreator().execute();
 	}
@@ -165,16 +164,6 @@ public class Navigator {
 	}
 
 	private class PathCreator extends AsyncTask<Void,Void,Directions>{
-		private ProgressDialog pd;
-		@Override
-		protected void onPreExecute(){
-			if(showCalc){
-				pd = new ProgressDialog(context);
-				pd.setMessage("Getting Directions");
-				pd.setIndeterminate(true);
-				pd.show();
-			}
-		}
 
 		@Override
 		protected Directions doInBackground(Void... params) {
@@ -240,10 +229,6 @@ public class Navigator {
 					listener.onPathSetListener(directions);
 				}
 				
-			}
-			
-			if(showCalc && pd != null){
-				pd.dismiss();
 			}
 		}
 		
