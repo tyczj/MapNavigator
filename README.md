@@ -6,7 +6,7 @@ and displays the route on the map.
 
 Only works with Google Maps v2
 
-![ScreenShot](/MapNavigator/Screenshot_2013-10-07-21-32-56_framed.png)
+![ScreenShot](/MapNavigator/MapNavigator/Screenshot_2013-10-07-21-32-56_framed.png)
 
 Usage
 =====
