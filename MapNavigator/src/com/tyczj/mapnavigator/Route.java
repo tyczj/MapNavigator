@@ -47,22 +47,14 @@ public class Route {
 				}
 			}
 			
-			if(!obj3.isNull("duration")){
-				JSONArray obj = obj3.getJSONArray("duration");
-				
-				for(int i=0; i<obj.length();i++){
-					JSONObject obj2 = obj.getJSONObject(i);
-					totalDuration = obj2.getString("text");
-				}
+			if(!obj3.isNull("distance")){
+				JSONObject obj = obj3.getJSONObject("distance");
+				totalDistance = obj.getString("text");
 			}
 			
-			if(!obj3.isNull("distance")){
-				JSONArray obj = obj3.getJSONArray("distance");
-				
-				for(int i=0; i<obj.length();i++){
-					JSONObject obj2 = obj.getJSONObject(i);
-					totalDistance = obj2.getString("text");
-				}
+			if(!obj3.isNull("duration")){
+				JSONObject obj = obj3.getJSONObject("duration");
+				totalDuration = obj.getString("text");
 			}
 			
 			if(!obj3.isNull("start_location")){

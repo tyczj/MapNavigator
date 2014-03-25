@@ -6,11 +6,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 public class Legs {
 	
 	private ArrayList<Steps> steps;
+	private String totalDistance;
+	private String totalDuration;
 	
 	public Legs(JSONObject leg){
 		steps = new ArrayList<Steps>();
@@ -28,14 +28,32 @@ public class Legs {
 				
 				for(int i=0; i<step.length();i++){
 					JSONObject obj = step.getJSONObject(i);
-					Log.d("Step", String.valueOf(i));
 					steps.add(new Steps(obj));
 				}
 			}
+			
+			if(!leg.isNull("distance")){
+				JSONObject obj = leg.getJSONObject("distance");
+				totalDistance = obj.getString("text");
+			}
+			
+			if(!leg.isNull("duration")){
+				JSONObject obj = leg.getJSONObject("duration");
+				totalDuration = obj.getString("text");
+			}
+			
 		}catch (JSONException e) {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public String getLegDistance(){
+		return totalDistance;
+	}
+	
+	public String getLegDuration(){
+		return totalDuration;
 	}
 
 }

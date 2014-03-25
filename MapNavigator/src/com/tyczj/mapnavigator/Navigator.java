@@ -197,7 +197,6 @@ public class Navigator {
 		            if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
 		            	
 		            	String s = EntityUtils.toString(response.getEntity());
-			            
 			            return new Directions(s);
 		            }
 		            
