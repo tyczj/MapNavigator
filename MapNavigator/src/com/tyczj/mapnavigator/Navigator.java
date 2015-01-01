@@ -28,9 +28,10 @@ public class Navigator {
 	private GoogleMap map;
 	private Directions directions;
 	private int pathColor = Color.BLUE;
+	private int pathBorderColor = Color.BLACK;
 	private int secondPath = Color.CYAN;
 	private int thirdPath = Color.RED;
-	private float pathWidth = 5;
+	private float pathWidth = 14;
 	private OnPathSetListener listener;
 	private boolean alternatives = false;
 	private long arrivalTime;
@@ -146,6 +147,10 @@ public class Navigator {
 		pathColor = firstPath;
 	}
 	
+	public void setPathBorderColor(int firstPath,int secondPath, int thirdPath){
+		pathBorderColor = firstPath;
+	}
+	
 	/**
 	 * Change the width of the path line
 	 * @param width
@@ -157,6 +162,10 @@ public class Navigator {
 	
 	private Polyline showPath(Route route,int color){
 		return map.addPolyline(new PolylineOptions().addAll(route.getPath()).color(color).width(pathWidth));
+	}
+	
+	private Polyline showBorderPath(Route route, int color){
+		return map.addPolyline(new PolylineOptions().addAll(route.getPath()).color(color).width(pathWidth + 12));
 	}
 	
 	public ArrayList<Polyline> getPathLines(){
@@ -216,10 +225,13 @@ public class Navigator {
 				for(int i=0; i<directions.getRoutes().size(); i++){
 					Route r = directions.getRoutes().get(i);
 					if(i == 0){
+						lines.add(showBorderPath(r,pathBorderColor));
 						lines.add(showPath(r,pathColor));
 					}else if(i == 1){
+						lines.add(showBorderPath(r,pathBorderColor));
 						lines.add(showPath(r,secondPath));
 					}else if(i == 3){
+						lines.add(showBorderPath(r,pathBorderColor));
 						lines.add(showPath(r,thirdPath));
 					}
 				}
