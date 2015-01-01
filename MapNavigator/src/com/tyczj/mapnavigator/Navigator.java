@@ -28,7 +28,7 @@ public class Navigator {
 	private GoogleMap map;
 	private Directions directions;
 	private int pathColor = Color.BLUE;
-	private int pathBorderColor = Color.CYAN;
+	private int pathBorderColor = Color.BLACK;
 	private int secondPath = Color.CYAN;
 	private int thirdPath = Color.RED;
 	private float pathWidth = 14;
@@ -228,8 +228,10 @@ public class Navigator {
 						lines.add(showBorderPath(r,pathBorderColor));
 						lines.add(showPath(r,pathColor));
 					}else if(i == 1){
+						lines.add(showBorderPath(r,pathBorderColor));
 						lines.add(showPath(r,secondPath));
 					}else if(i == 3){
+						lines.add(showBorderPath(r,pathBorderColor));
 						lines.add(showPath(r,thirdPath));
 					}
 				}
